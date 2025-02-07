@@ -1,5 +1,29 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
-  devtools: { enabled: true }
+  app: {
+    head: {
+      titleTemplate: '',
+      title: 'First Task 2035',
+    }
+  },
+  devtools: {
+    enabled: true,
+
+    timeline: {
+      enabled: true
+    }
+  },
+  css: ['~/assets/main.scss'],
+
+  modules: [
+    '@pinia/nuxt',
+    'unplugin-icons/nuxt'
+  ],
+
+
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {}
+    }
+  }
 })
