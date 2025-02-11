@@ -1,28 +1,47 @@
 <script setup lang="ts">
-const props = defineProps({
-  path: String
-})
+const props = defineProps<{
+  path?: string;
+  path1?: string;
+  formFields: { name: string; type: string; placeholder: string; required?: boolean, class: string }[];
+  buttonClass: string,
+  formClass: string,
+  firstLink?: string,
+  secondLink?: string,
+  name: string,
+  surname?: string,
+  nameButton: string,
+  popupWidth: string,
+  popupHeight: string,
+  redirectTo: string,
+  boldText: string
+}>();
+
+
 </script>
 
 <template>
-  <div class="popup">
+  <div class="popup" :style="{ '--popup-width': popupWidth, '--popup-height': popupHeight }">
     <div class="container">
       <h4 class="name">
-        Войти в профиль
+        {{ props.name }}
       </h4>
-      <form action="#" class="auth">
-        <input class="email" type="email" name="auth_email" placeholder="Логин" required>
-        <input type="password" name="auth_pass" placeholder="Пароль" required >
-        <button class="form_auth_button" type="submit" name="form_auth_submit">Войти</button>
-      </form>
-      <a class="recover">Восстановить пароль</a>
+      <DynamicForm
+          :fields="formFields"
+          :buttonClass="buttonClass"
+          :formClass="formClass"
+          :name-button="nameButton"
+          :redirect-to="redirectTo"
+      />
+      <NuxtLink class="recover" :to="path">
+        <p>{{firstLink}} <b>{{boldText}}</b></p>
+      </NuxtLink>
       <div class="cont-sign-in">
-        <p>У Вас нет профиля?</p>
-        <NuxtLink class="sign-in" :to="props.path">
-          <p class="space">Зарегистрироваться</p>
+        <p>{{ props.surname }}</p>
+        <NuxtLink class="sign-in" :to="path1">
+          <p class="space">{{secondLink}}</p>
         </NuxtLink>
       </div>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -34,8 +53,8 @@ const props = defineProps({
   border-radius: 20px;
   fill: #fff;
   box-shadow: 0 0 24px 0 rgba(52, 56, 77, 0.2);
-  width: 700px;
-  height: 501px;
+  width: var(--popup-width, 700px);
+  height: var(--popup-height, 501px);
 }
 
 .container {
@@ -44,7 +63,7 @@ const props = defineProps({
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 10%;
   width: 100%;
 }
 
@@ -57,38 +76,6 @@ const props = defineProps({
   color: #2c2c2c;
 }
 
-.auth {
-  width: 502px;
-  height: 140px;
-}
-
-input:focus {
-  outline: none;
-}
-input {
-  border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
-  width: 500px;
-  height: 60px;
-  font-weight: 400;
-  font-size: 24px;
-  color: rgba(0, 0, 0, 0.3);
-}
-
-.form_auth_button {
-  margin-top: 15%;
-  border-radius: 500px;
-  border: 0;
-  width: 500px;
-  height: 72px;
-  box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.2);
-  background: #148c88;
-  font-weight: 600;
-  font-size: 21px;
-  text-align: center;
-  color: #fff;
-}
-
 .recover {
   padding-left: 14%;
   align-self: self-start;
@@ -97,6 +84,7 @@ input {
   line-height: 137%;
   color: #aaa;
   border: 0;
+  width: 500px;
 }
 
 .cont-sign-in {
@@ -107,13 +95,13 @@ input {
   line-height: 137%;
   color: #aaa;
   padding: 15%;
+  text-decoration: none;
 }
 
 .sign-in {
   font-weight: 400;
   font-size: 18px;
   line-height: 137%;
-
   color: #000;
   text-decoration: none;
 }

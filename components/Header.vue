@@ -1,11 +1,13 @@
 <script setup lang="ts">
-
+const path = '/'
 </script>
 
 <template>
   <header>
     <div class="name">
-      ПЛАТФОРМА
+      <NuxtLink class="link" :to="path">
+        ПЛАТФОРМА
+      </NuxtLink>
     </div>
   </header>
 </template>
@@ -25,6 +27,11 @@ header {
   margin: 5%;
   font-weight: 400;
   font-size: 32px;
+  color: #fff;
+}
+
+.link {
+  text-decoration: none;
   color: #fff;
 }
 
