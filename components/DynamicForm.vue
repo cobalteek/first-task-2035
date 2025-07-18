@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import router from "#app/plugins/router";
-
 
 const props = defineProps<{
   fields: {

@@ -10,10 +10,10 @@ const props = defineProps<{
   name: string,
   surname?: string,
   nameButton: string,
-  popupWidth: string,
-  popupHeight: string,
-  redirectTo: string,
-  boldText: string
+  popupWidth?: string,
+  popupHeight?: string,
+  redirectTo?: string,
+  boldText?: string
 }>();
 
 
